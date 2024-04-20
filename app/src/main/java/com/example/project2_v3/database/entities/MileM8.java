@@ -1,10 +1,10 @@
-package com.example.project2_v3.Database.entities;
+package com.example.project2_v3.database.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.project2_v3.Database.MileM8Database;
+import com.example.project2_v3.database.MileM8Database;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity (tableName = MileM8Database.MILE_M_8_TABLE)
@@ -17,7 +17,7 @@ public class MileM8 {
     private double odometer;
     private double tollFees;
     private double parkingFees;
-    private LocalDate date;
+    private LocalDateTime date;
 
     public MileM8(String locations, double miles, double odometer, double tollFees, double parkingFees) {
         this.locations = locations;
@@ -25,7 +25,7 @@ public class MileM8 {
         this.odometer = odometer;
         this.tollFees = tollFees;
         this.parkingFees = parkingFees;
-        date = LocalDate.now();
+        date = LocalDateTime.now();
     }
 
     @Override
@@ -89,11 +89,11 @@ public class MileM8 {
         this.parkingFees = parkingFees;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

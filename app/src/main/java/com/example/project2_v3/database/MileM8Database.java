@@ -1,20 +1,21 @@
-package com.example.project2_v3.Database;
+package com.example.project2_v3.database;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.project2_v3.Database.entities.MileM8;
-import com.example.project2_v3.MainActivity;
+import com.example.project2_v3.database.entities.MileM8;
+import com.example.project2_v3.database.typeConverters.LocalDateTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@TypeConverters(LocalDateTypeConverter.class)
 @Database(entities = {MileM8.class}, version = 1, exportSchema = false)
 public abstract class MileM8Database extends RoomDatabase {
 

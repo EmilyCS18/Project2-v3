@@ -1,10 +1,8 @@
-package com.example.project2_v3.Database;
+package com.example.project2_v3.database;
 
 import android.app.Application;
-import android.util.Log;
 
-import com.example.project2_v3.Database.entities.MileM8;
-import com.example.project2_v3.MainActivity;
+import com.example.project2_v3.database.entities.MileM8;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
@@ -25,7 +23,7 @@ public class MileM8Repository {
                 new Callable<ArrayList<MileM8>>() {
                     @Override
                     public ArrayList<MileM8> call() throws Exception {
-                        return milem8DAO.getAllRecords();
+                        return (ArrayList<MileM8>) milem8DAO.getAllRecords();
                     }
                 }
         );
@@ -33,7 +31,7 @@ public class MileM8Repository {
             return future.get();
         } catch (InterruptedException | ExecutionException e){
             e.printStackTrace();
-           // Log.i(MainActivity.TAG, "Problem when getting all MilesLogs in the repository");
+           //Log.i(MainActivity.TAG, "Problem when getting all MilesLogs in the repository");
         }
         return null;
 
