@@ -23,4 +23,7 @@ public interface UserDAO {
 
     @Query("DELETE from " + MileM8Database.USER_TABLE)
     void deleteAll();
+    @Query("SELECT * from " + MileM8Database.USER_TABLE + "WHERE username == :username" )
+    User getUserByUserName(String username);
+
 }

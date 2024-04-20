@@ -79,4 +79,22 @@ public class MileM8Repository {
             userDAO.insert(user);
         });
     }
+
+    public User getUserbyUserName(String username) {
+        Future<User> future = MileM8Database.databaseWriteExecutor.submit(
+                new Callable<User>() {
+                    @Override
+                    public User call() throws Exception {
+                        return userDAO.getUserByUserName(username);
+                    }
+                });
+         try {
+             future.get();
+         } catch (InterruptedException | ExecutionException e) {
+             Log.i(MainActivity.TAG, "Problem When Getting User by Username");
+         }
+         return null;
+
+
+    }
 }
