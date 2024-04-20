@@ -10,4 +10,12 @@
     <string name="signup">Signup</string>
     <string name="login">Login</string>
     <string name="welcome_to_mileage_m8">Welcome to Mileage M8!</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_up2">Sign Up</string>
+    <string name="already_a_user_login">Already a user? Login</string>
+    <string name="not_yet_registered_signup_now">Not Yet Registered? Signup Now</string>
 </resources>
