@@ -1,6 +1,7 @@
 package com.example.project2_v3.database;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -9,6 +10,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.project2_v3.MainActivity;
 import com.example.project2_v3.database.entities.MileM8;
 import com.example.project2_v3.database.typeConverters.LocalDateTypeConverter;
 
@@ -49,7 +51,7 @@ public abstract class MileM8Database extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);
-            //Log.i(MainActivity.TAG, "DATABASE CREATED!! ") uncomment when tag in created
+            Log.i(MainActivity.TAG, "DATABASE CREATED!! ");
             // TODO: add databaseWriteExecutor.execute(() -> {...}
         }
     };

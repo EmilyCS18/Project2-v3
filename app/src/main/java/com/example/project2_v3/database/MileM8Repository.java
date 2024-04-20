@@ -1,7 +1,9 @@
 package com.example.project2_v3.database;
 
 import android.app.Application;
+import android.util.Log;
 
+import com.example.project2_v3.MainActivity;
 import com.example.project2_v3.database.entities.MileM8;
 
 import java.util.ArrayList;
@@ -12,10 +14,32 @@ import java.util.concurrent.Future;
 public class MileM8Repository {
     private MileM8DAO milem8DAO;
     private ArrayList<MileM8> allMiles;
-    public MileM8Repository(Application application){
+
+    private static MileM8Repository repository;
+    private MileM8Repository(Application application){
         MileM8Database db = MileM8Database.getDatabase(application);
         this.milem8DAO = db.milem8DAO();
         this.allMiles = (ArrayList<MileM8>) this.milem8DAO.getAllRecords();
+    }
+
+    public static MileM8Repository getRepository(Application application){
+        if(repository != null){
+            return repository;
+        }
+        Future<MileM8Repository> future = MileM8Database.databaseWriteExecutor.submit(
+                new Callable<MileM8Repository>() {
+                    @Override
+                    public MileM8Repository call() throws Exception {
+                        return new MileM8Repository(application);
+                    }
+                }
+        );
+        try{
+            return future.get();
+        } catch (InterruptedException | ExecutionException e){
+            Log.i(MainActivity.TAG, "Problem getting MileM8Repoitory, thread error.");
+        }
+        return null;
     }
 
     public ArrayList<MileM8> getAllMiles() {
@@ -31,7 +55,7 @@ public class MileM8Repository {
             return future.get();
         } catch (InterruptedException | ExecutionException e){
             e.printStackTrace();
-           //Log.i(MainActivity.TAG, "Problem when getting all MilesLogs in the repository");
+           Log.i(MainActivity.TAG, "Problem when getting all MilesLogs in the repository");
         }
         return null;
 
