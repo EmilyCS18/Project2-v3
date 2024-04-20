@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private void loginUser() {
         //TODO: make login method functional
         user = new User("Emily", "1234");
-        loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, -1);
+        loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, 1);
     }
 
     static Intent mainActivityIntentFactory(Context context, int userId){
