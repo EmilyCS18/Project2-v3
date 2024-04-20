@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.project2_v3.MainActivity;
 import com.example.project2_v3.database.entities.MileM8;
+import com.example.project2_v3.database.entities.User;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
@@ -12,13 +13,16 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class MileM8Repository {
-    private MileM8DAO milem8DAO;
+    private final MileM8DAO milem8DAO;
+
+    private final UserDAO userDAO;
     private ArrayList<MileM8> allMiles;
 
     private static MileM8Repository repository;
     private MileM8Repository(Application application){
         MileM8Database db = MileM8Database.getDatabase(application);
         this.milem8DAO = db.milem8DAO();
+        this.userDAO = db.userDAO();
         this.allMiles = (ArrayList<MileM8>) this.milem8DAO.getAllRecords();
     }
 
@@ -68,4 +72,11 @@ public class MileM8Repository {
                 });
     }
 
+
+    public void insertUSer(User... user){
+        MileM8Database.databaseWriteExecutor.execute(()->
+        {
+            userDAO.insert(user);
+        });
+    }
 }

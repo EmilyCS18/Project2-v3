@@ -12,16 +12,18 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.project2_v3.MainActivity;
 import com.example.project2_v3.database.entities.MileM8;
+import com.example.project2_v3.database.entities.User;
 import com.example.project2_v3.database.typeConverters.LocalDateTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {MileM8.class}, version = 1, exportSchema = false)
+@Database(entities = {MileM8.class, User.class}, version = 1, exportSchema = false)
 public abstract class MileM8Database extends RoomDatabase {
 
-    private static final String DATABASE_NAME = "MileM8_database";
+    public static final String USER_TABLE = "usertable";
+    private static final String DATABASE_NAME = "MileM8database";
     public static final String MILE_M_8_TABLE = "mileM8Table";
 
     private static volatile MileM8Database INSTANCE;
@@ -52,9 +54,19 @@ public abstract class MileM8Database extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);
             Log.i(MainActivity.TAG, "DATABASE CREATED!! ");
-            // TODO: add databaseWriteExecutor.execute(() -> {...}
+            databaseWriteExecutor.execute(() -> {
+                UserDAO dao = INSTANCE.userDAO();
+                dao.deleteAll();
+                User admin = new User("admin1", "admin1");
+                admin.setAdmin(true);
+                dao.insert(admin);
+                User testUser1 = new User ("testuser1", "testuser1");
+                dao.insert(testUser1);
+            });
         }
     };
 
     public abstract MileM8DAO milem8DAO();
+
+    public abstract UserDAO userDAO();
 }

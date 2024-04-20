@@ -18,13 +18,15 @@ public class MileM8 {
     private double tollFees;
     private double parkingFees;
     private LocalDateTime date;
+    private int userId;
 
-    public MileM8(String locations, double miles, double odometer, double tollFees, double parkingFees) {
+    public MileM8(String locations, double miles, double odometer, double tollFees, double parkingFees, int userId) {
         this.locations = locations;
         this.miles = miles;
         this.odometer = odometer;
         this.tollFees = tollFees;
         this.parkingFees = parkingFees;
+        this.userId = userId;
         date = LocalDateTime.now();
     }
 
@@ -33,12 +35,12 @@ public class MileM8 {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MileM8 mileM8 = (MileM8) o;
-        return id == mileM8.id && Double.compare(mileM8.miles, miles) == 0 && Double.compare(mileM8.odometer, odometer) == 0 && Double.compare(mileM8.tollFees, tollFees) == 0 && Double.compare(mileM8.parkingFees, parkingFees) == 0 && Objects.equals(locations, mileM8.locations) && Objects.equals(date, mileM8.date);
+        return id == mileM8.id && Double.compare(mileM8.miles, miles) == 0 && Double.compare(mileM8.odometer, odometer) == 0 && Double.compare(mileM8.tollFees, tollFees) == 0 && Double.compare(mileM8.parkingFees, parkingFees) == 0 && userId == mileM8.userId && Objects.equals(locations, mileM8.locations) && Objects.equals(date, mileM8.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, locations, miles, odometer, tollFees, parkingFees, date);
+        return Objects.hash(id, locations, miles, odometer, tollFees, parkingFees, date, userId);
     }
 
     public int getId() {
@@ -95,5 +97,13 @@ public class MileM8 {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

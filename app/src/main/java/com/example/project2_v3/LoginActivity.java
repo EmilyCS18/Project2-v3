@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //TODO: Add login information
+    int loggedinuserId = -1;
+
     EditText loginUsername, loginPassword;
     Button loginButton;
     TextView signupRedirectText;
