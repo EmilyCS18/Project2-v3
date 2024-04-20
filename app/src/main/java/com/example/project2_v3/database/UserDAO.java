@@ -21,5 +21,6 @@ public interface UserDAO {
     @Query("SELECT * FROM " + MileM8Database.USER_TABLE + " ORDER BY username")
     List<User>getALLUsers();
 
-    @Query("DELETE from " + MileM8Database.USER_TABLE) void deleteAll();
+    @Query("DELETE from " + MileM8Database.USER_TABLE)
+    void deleteAll();
 }
