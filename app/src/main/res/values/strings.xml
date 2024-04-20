@@ -7,4 +7,7 @@
     <string name="vehicles">Vehicles</string>
     <string name="mileagem8_LP_Title">Mileage M8</string>
     <string name="admin_stuff">Admin Stuff</string>
+    <string name="signup">Signup</string>
+    <string name="login">Login</string>
+    <string name="welcome_to_mileage_m8">Welcome to Mileage M8!</string>
 </resources>
