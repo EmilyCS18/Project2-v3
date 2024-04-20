@@ -36,8 +36,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (!verifyUser()) {
                     Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
 
-                } else {//TODO: 14:40 on video 10 
-                    //Intent intent = LandingPage.
+                } else {//TODO: 14:40 on video 10
+                    //Intent intent = LandingPage.intentfactory
 
                     startActivity(new Intent(LoginActivity.this, SignupActivity.class));
                 }
