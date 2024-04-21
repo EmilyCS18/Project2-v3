@@ -1,5 +1,6 @@
 package com.example.project2_v3.database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -19,11 +20,14 @@ public interface UserDAO {
     void delete(User user);
     
     @Query("SELECT * FROM " + MileM8Database.USER_TABLE + " ORDER BY username")
-    List<User>getALLUsers();
+    LiveData<List<User>> getALLUsers();
 
     @Query("DELETE from " + MileM8Database.USER_TABLE)
     void deleteAll();
-    @Query("SELECT * from " + MileM8Database.USER_TABLE + "WHERE username == :username" )
-    User getUserByUserName(String username);
+    @Query("SELECT * from " + MileM8Database.USER_TABLE + " WHERE username == :username" )
+    LiveData<User> getUserByUserName(String username);
+
+    @Query("SELECT * from " + MileM8Database.USER_TABLE + " WHERE id == :userId" )
+    LiveData<User> getUserByUserId(int userId);
 
 }

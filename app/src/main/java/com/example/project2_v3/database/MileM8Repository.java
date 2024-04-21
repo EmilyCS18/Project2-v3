@@ -3,6 +3,8 @@ package com.example.project2_v3.database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.project2_v3.MainActivity;
 import com.example.project2_v3.database.entities.MileM8;
 import com.example.project2_v3.database.entities.User;
@@ -14,11 +16,11 @@ import java.util.concurrent.Future;
 
 public class MileM8Repository {
     private final MileM8DAO milem8DAO;
-
     private final UserDAO userDAO;
     private ArrayList<MileM8> allMiles;
-
     private static MileM8Repository repository;
+
+
     private MileM8Repository(Application application){
         MileM8Database db = MileM8Database.getDatabase(application);
         this.milem8DAO = db.milem8DAO();
@@ -53,8 +55,7 @@ public class MileM8Repository {
                     public ArrayList<MileM8> call() throws Exception {
                         return (ArrayList<MileM8>) milem8DAO.getAllRecords();
                     }
-                }
-        );
+                });
         try{
             return future.get();
         } catch (InterruptedException | ExecutionException e){
@@ -72,7 +73,6 @@ public class MileM8Repository {
                 });
     }
 
-
     public void insertUSer(User... user){
         MileM8Database.databaseWriteExecutor.execute(()->
         {
@@ -80,21 +80,12 @@ public class MileM8Repository {
         });
     }
 
-    public User getUserbyUserName(String username) {
-        Future<User> future = MileM8Database.databaseWriteExecutor.submit(
-                new Callable<User>() {
-                    @Override
-                    public User call() throws Exception {
-                        return userDAO.getUserByUserName(username);
-                    }
-                });
-         try {
-             future.get();
-         } catch (InterruptedException | ExecutionException e) {
-             Log.i(MainActivity.TAG, "Problem When Getting User by Username");
-         }
-         return null;
-
-
+    public LiveData<User> getUserbyUserName(String username) {
+        return userDAO.getUserByUserName(username);
     }
+
+    public LiveData<User> getUserbyUserId(int userId) {
+        return userDAO.getUserByUserId(userId);
+    }
+
 }
