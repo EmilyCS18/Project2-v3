@@ -52,28 +52,19 @@ public class MainActivity extends AppCompatActivity {
         repository = MileM8Repository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
-        // if User is not logged in at this point, then go to the login screen
-        if(loggedInUserId == -1){
-            Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
+        // Redirect to LandingActivity if user is logged in new method as of 4/20 @10PM
+        if (loggedInUserId != -1) {
+            Intent intent = new Intent(MainActivity.this, LandingActivity.class);
             startActivity(intent);
+            finish(); // Close MainActivity
         }
 
-        updateSharedPreference();
+        binding.buttonMainLogin.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, LoginActivity.class)));
 
-        binding.buttonMainLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                            }
-        });
-
-        binding.buttonMainSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SignupActivity.class));
-            }
-        });
+        binding.buttonMainSignup.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SignupActivity.class)));
     }
+
+
 
     private void loginUser(Bundle savedInstanceState) {
         //check shared preference for logged in user
