@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import com.example.project2_v3.database.MileM8Repository;
 import com.example.project2_v3.database.entities.User;
@@ -91,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        //TODO: Finish logout method
+        //TODO: Finish logout method, wait do i??? it's in main
         startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
     }
 }

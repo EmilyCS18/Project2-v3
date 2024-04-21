@@ -18,7 +18,7 @@ public class MileM8Repository {
     private final MileM8DAO milem8DAO;
     private final UserDAO userDAO;
     private ArrayList<MileM8> allMiles;
-    private static MileM8Repository repository;
+    public static MileM8Repository repository;
 
 
     private MileM8Repository(Application application){

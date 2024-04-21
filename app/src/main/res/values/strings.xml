@@ -18,4 +18,6 @@
     <string name="sign_up2">Sign Up</string>
     <string name="already_a_user_login">Already a user? Login</string>
     <string name="not_yet_registered_signup_now">Not Yet Registered? Signup Now</string>
+    <string name="sharedprefrence_file_key">mileM8PreferenceFileNameMileoM8</string>
+    <string name="preference_userId_key">mileM8PreferenceUserIdKeyMileM8</string>
 </resources>
