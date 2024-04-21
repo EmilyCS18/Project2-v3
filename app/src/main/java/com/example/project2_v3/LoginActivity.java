@@ -36,6 +36,12 @@ public class LoginActivity extends AppCompatActivity {
                 verifyUser();
             }
         });
+
+        binding.loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
     }
     private void verifyUser(){
         String username = binding.loginUsername.getText().toString();

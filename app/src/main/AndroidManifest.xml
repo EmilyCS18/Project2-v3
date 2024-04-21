@@ -19,7 +19,7 @@
             android:name=".SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".LandingPage"
+            android:name=".LandingActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
