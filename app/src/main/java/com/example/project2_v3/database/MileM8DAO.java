@@ -8,6 +8,7 @@ import androidx.room.Query;
 import com.example.project2_v3.database.entities.MileM8;
 
 import java.util.List;
+import java.util.Objects;
 
 @Dao
 public interface MileM8DAO {
@@ -16,4 +17,7 @@ public interface MileM8DAO {
 
     @Query("Select * from " + MileM8Database.MILE_M_8_TABLE)
     List<MileM8> getAllRecords();
+
+    @Query("Select * from " + MileM8Database.MILE_M_8_TABLE + " WHERE userId = :loggedInUserId ORDER BY date DESC")
+    List<MileM8> getRecordsetUserId(int loggedInUserId);
 }
