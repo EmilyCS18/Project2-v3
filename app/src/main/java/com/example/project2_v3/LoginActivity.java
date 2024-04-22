@@ -28,7 +28,12 @@ public class LoginActivity extends AppCompatActivity {
 
         repository = MileM8Repository.getRepository(getApplication());
 
-        binding.signupRedirectTextTextView.setOnClickListener(v -> verifyUser());
+        binding.signupRedirectTextTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+            }
+        });
 
         binding.loginButton.setOnClickListener(v -> verifyUser());
     }
