@@ -19,6 +19,7 @@
         android:layout_marginTop="5dp"
         android:backgroundTint="@color/bright_blue"
         android:drawableLeft="@drawable/baseline_arrow_back_ios_24"
+        android:hint="l"
         app:cornerRadius="100dp" />
 
     <androidx.cardview.widget.CardView
