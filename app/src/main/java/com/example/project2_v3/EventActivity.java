@@ -17,8 +17,8 @@ public class EventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
 
-        Button dateButton = findViewById(R.id.datePickerButton);
-        Button timeButton = findViewById(R.id.timePickerButton);
+        dateButton = findViewById(R.id.datePickerButton);
+        timeButton = findViewById(R.id.timePickerButton);
 
         dateButton.setOnClickListener(v -> showDatePickerDialog());
         timeButton.setOnClickListener(v -> showTimePickerDialog());
