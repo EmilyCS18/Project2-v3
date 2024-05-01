@@ -10,6 +10,7 @@ import android.widget.Button;
 public class VehicleActivity extends AppCompatActivity {
 
     private Button addVehicleButton;
+    private Button viewVehiclesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,15 @@ public class VehicleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VehicleActivity.this, AddVehicleActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        viewVehiclesButton = findViewById(R.id.view_vehicles_button);
+        viewVehiclesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VehicleActivity.this, ViewVehiclesActivity.class);
                 startActivity(intent);
             }
         });
