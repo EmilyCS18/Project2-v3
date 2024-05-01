@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
         return intent;
     }
-    //TODO: double check if its the right option menu plz
+    /*//TODO: double check if its the right option menu plz
     @Override
     public void invalidateOptionsMenu() {
         super.invalidateOptionsMenu();
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         alertBuilder.create().show();
-    }
+    } */
 
     private void logout() {
         loggedInUserId = LOGGED_OUT;

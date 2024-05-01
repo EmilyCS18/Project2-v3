@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class EventActivity extends AppCompatActivity {
-    //hi
+
     private Button dateButton;
     private Button timeButton;
     private EditText startingLocationEditText, destinationLocationEditText;
