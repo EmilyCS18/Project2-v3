@@ -62,12 +62,12 @@
                 android:orientation="horizontal" />
 
             <Button
-                android:id="@+id/new_vehicle_button"
+                android:id="@+id/add_vehicle_button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/bright_blue"
-                android:text="New Vehicle"
+                android:text="Add Vehicle"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />

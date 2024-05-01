@@ -1,3 +1,5 @@
+package com.example.project2_v3;
+
 public class Vehicle {
     private String name;
     private String make;
