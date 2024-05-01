@@ -2,13 +2,20 @@ package com.example.project2_v3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class EventActivity extends AppCompatActivity {
@@ -16,6 +23,12 @@ public class EventActivity extends AppCompatActivity {
     private Button timeButton;
     private EditText startingLocationEditText, destinationLocationEditText;
     private Button saveTripButton;
+
+    private TextView selectVehicleTextView;
+    private ArrayList<String> vehicleList = new ArrayList<>();
+    private ArrayAdapter<String> vehicleAdapter;
+    private ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +46,11 @@ public class EventActivity extends AppCompatActivity {
         saveTripButton = findViewById(R.id.save_trip_button);
 
         saveTripButton.setOnClickListener(v -> saveLocationData());
+
+
+        //Vehicle stuff
+        selectVehicleTextView = findViewById(R.id.select_Vehicle_Text);
+        selectVehicleTextView.setOnClickListener(v -> showVehiclePopup());
 
     }
     private void showDatePickerDialog() {
@@ -71,5 +89,45 @@ public class EventActivity extends AppCompatActivity {
         editor.putString("StartingLocation", startingLocation);
         editor.putString("DestinationLocation", destinationLocation);
         editor.apply(); // Use apply() instead of commit() for asynchronous data saving
+    }
+
+     //vehicles stuff
+     private void showVehiclePopup() {
+         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+         LayoutInflater inflater = this.getLayoutInflater();
+         View dialogView = inflater.inflate(R.layout.popup_select_vehicle, null);
+         builder.setView(dialogView);
+
+         listView = dialogView.findViewById(R.id.list_vehicles);
+         EditText newVehicleName = dialogView.findViewById(R.id.new_vehicle_name);
+         Button addVehicleButton = dialogView.findViewById(R.id.add_vehicle_button);
+
+         // Initialize and set the adapter for the ListView
+         vehicleAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, vehicleList);
+         listView.setAdapter(vehicleAdapter);
+
+         // Load existing vehicles
+         loadVehicles();
+
+         // Add new vehicle button logic
+         addVehicleButton.setOnClickListener(v -> {
+             String vehicle = newVehicleName.getText().toString();
+             if (!vehicle.isEmpty()) {
+                 vehicleList.add(vehicle);
+                 vehicleAdapter.notifyDataSetChanged();
+                 newVehicleName.setText(""); // Clear the input field
+             }
+         });
+
+         AlertDialog dialog = builder.create();
+         dialog.show();
+     }
+
+    private void loadVehicles() {
+        // Dummy data, replace this with actual data loading logic
+        vehicleList.add("Car");
+        vehicleList.add("Truck");
+        vehicleList.add("Motorcycle");
+        vehicleAdapter.notifyDataSetChanged();
     }
 }
