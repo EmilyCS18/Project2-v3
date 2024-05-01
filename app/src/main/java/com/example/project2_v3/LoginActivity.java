@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -14,11 +15,18 @@ import androidx.lifecycle.LiveData;
 import com.example.project2_v3.database.MileM8Repository;
 import com.example.project2_v3.database.entities.User;
 import com.example.project2_v3.databinding.ActivityLoginBinding;
+import com.example.project2_v3.databinding.ActivityMainBinding;
 
 public class LoginActivity extends AppCompatActivity {
-
-    private ActivityLoginBinding binding;
+    private static final String LOGIN_ACTIVITY_USER_ID = "com.example.project2_v3.LOGIN_ACTIVITY_USER_ID";
+    static final String SAVED_PREFERENCE_USERID_KEY = "com.example.project2_v3.SHARED_PREFERENCE_USERID_KEY";
+    private static final int LOGGED_OUT = -1;
     private MileM8Repository repository;
+    private int loggedInUserId = -1;
+    private User user;
+    ActivityLoginBinding binding;
+    public static final String TAG = "EJ_MILE_M8";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +35,41 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         repository = MileM8Repository.getRepository(getApplication());
+        //repository.getUserbyUserId(loggedInUserId).observe(this, Mil);
 
-        binding.signupRedirectTextTextView.setOnClickListener(v -> verifyUser());
+        binding.signupRedirectTextTextView.setOnClickListener(v -> {
+            loginUser(savedInstanceState);
+            verifyUser();
+        });
 
-        binding.loginButton.setOnClickListener(v -> verifyUser());
+        binding.loginButton.setOnClickListener(v ->{
+            loginUser(savedInstanceState);
+            verifyUser();
+        });
+    }
+    private void loginUser(Bundle savedInstanceState) {
+        //check shared preference for logged in user
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.sharedprefrence_file_key),
+                Context.MODE_PRIVATE);
+
+        loggedInUserId = sharedPreferences.getInt(getString(R.string.preference_userId_key), LOGGED_OUT);
+
+        if(loggedInUserId == LOGGED_OUT & savedInstanceState != null && savedInstanceState.containsKey(SAVED_PREFERENCE_USERID_KEY)){
+            loggedInUserId = savedInstanceState.getInt(SAVED_PREFERENCE_USERID_KEY, LOGGED_OUT);
+        }
+        if(loggedInUserId == LOGGED_OUT){
+            loggedInUserId = getIntent().getIntExtra(LOGIN_ACTIVITY_USER_ID, LOGGED_OUT);
+        }
+        if(loggedInUserId == LOGGED_OUT){
+            return;
+        }
+        LiveData<User> userObserver = repository.getUserbyUserId(loggedInUserId);
+        userObserver.observe(this, user -> {
+            this.user = user;
+            if(this.user != null){
+                invalidateOptionsMenu();
+            }
+        });
     }
 
     private void verifyUser() {
@@ -55,6 +94,14 @@ public class LoginActivity extends AppCompatActivity {
                 binding.loginUsername.setSelection(0);
             }
         });
+    }
+    private void updateSharedPreference(){
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.sharedprefrence_file_key),
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.putInt(getString(R.string.preference_userId_key), loggedInUserId);
+        sharedPrefEditor.apply();
+
     }
 
     private void toastMaker(String message) {
