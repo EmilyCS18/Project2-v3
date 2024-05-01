@@ -83,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             if (user != null) {
                 String password = binding.loginPassword.getText().toString();
                 if (password.equals(user.getPassword())) {
+                    //save id to shared preference
                     startActivity(new Intent(LoginActivity.this, LandingActivity.class).putExtra("USER_ID", user.getId()));
                     finish();  // Optional: Close LoginActivity after redirecting
                 } else {
