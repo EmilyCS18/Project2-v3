@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,6 +48,15 @@ public class EventActivity extends AppCompatActivity {
 
         saveTripButton.setOnClickListener(v -> saveLocationData());
 
+        Button backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EventActivity.this, LandingActivity.class);
+                startActivity(intent);
+                finish(); // should it be finish or not?
+            }
+        });
 
         //Vehicle stuff
         selectVehicleTextView = findViewById(R.id.select_Vehicle_Text);

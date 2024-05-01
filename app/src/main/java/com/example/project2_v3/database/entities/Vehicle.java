@@ -5,7 +5,6 @@ import androidx.room.PrimaryKey;
 public class Vehicle {
     @PrimaryKey(autoGenerate = true)
     public int id;
-
     public String nickname;
     public String model;
     public int odometer;
