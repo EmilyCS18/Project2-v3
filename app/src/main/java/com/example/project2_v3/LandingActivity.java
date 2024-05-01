@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class LandingActivity extends AppCompatActivity {
     private Button eventsButton;
+    private Button vehicleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,16 @@ public class LandingActivity extends AppCompatActivity {
                 startActivity(intent);
     }
         });
+
+        vehicleButton = findViewById(R.id.button_LP_vehicles);
+        vehicleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingActivity.this, VehicleActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 }
