@@ -13,21 +13,24 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.project2_v3.MainActivity;
 import com.example.project2_v3.database.entities.MileM8;
 import com.example.project2_v3.database.entities.User;
+import com.example.project2_v3.database.entities.Vehicle;
 import com.example.project2_v3.database.typeConverters.LocalDateTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {MileM8.class, User.class}, version = 1, exportSchema = false)
+@Database(entities = {MileM8.class, User.class, Vehicle.class}, version = 1, exportSchema = false)
 public abstract class MileM8Database extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
     private static final String DATABASE_NAME = "MileM8database";
     public static final String MILE_M_8_TABLE = "mileM8Table";
+    public static final String VEHICLE_TABLE = "vehicleTable";
 
     private static volatile MileM8Database INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
+
 
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
@@ -69,4 +72,6 @@ public abstract class MileM8Database extends RoomDatabase {
     public abstract MileM8DAO milem8DAO();
 
     public abstract UserDAO userDAO();
+
+    public abstract VehicleDAO vehicleDao();
 }

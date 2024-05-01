@@ -22,6 +22,9 @@
             android:name=".VehicleActivity"
             android:exported="false" />
         <activity
+            android:name=".ReportsActivity"
+            android:exported="false" />
+        <activity
             android:name=".EventActivity"
             android:exported="false" />
         <activity

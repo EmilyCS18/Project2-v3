@@ -73,7 +73,7 @@ public class MileM8Repository {
                 });
     }
 
-    public void insertUSer(User... user){
+    public void insertUser(User... user){
         MileM8Database.databaseWriteExecutor.execute(()->
         {
             userDAO.insert(user);
