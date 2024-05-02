@@ -10,10 +10,9 @@ import android.widget.Button;
 
 public class LandingActivity extends AppCompatActivity {
     private Button eventsButton;
+    private Button reportsButton;
     private Button vehicleButton;
-
     private Button adminButton;
-    boolean isAdmin = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +28,15 @@ public class LandingActivity extends AppCompatActivity {
                 Intent intent = new Intent(LandingActivity.this, EventActivity.class);
                 startActivity(intent);
     }
+        });
+
+        reportsButton = findViewById(R.id.button_LP_reports);
+        reportsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingActivity.this, ReportsActivity.class);
+                startActivity(intent);
+            }
         });
 
         vehicleButton = findViewById(R.id.button_LP_vehicles);
