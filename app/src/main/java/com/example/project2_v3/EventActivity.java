@@ -102,7 +102,7 @@ public class EventActivity extends AppCompatActivity {
         int mileageDifference = newOdometer - originalOdometer;
 
         // Display the mileage difference using TextView
-        mileageDifferenceTextView.setText("Mileage of Trip: " + mileageDifference + " miles");
+        mileageDifferenceTextView.setText(mileageDifference + " miles");
 
         // Save the mileage difference
         SharedPreferences sharedPreferences = getSharedPreferences("MileageData", MODE_PRIVATE);

@@ -10,13 +10,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.project2_v3.database.MileM8Repository;
+import com.example.project2_v3.database.entities.User;
+
 public class SignupActivity extends AppCompatActivity {
 
     EditText signupName, signupEmail, signupUsername, signupPassword;
     TextView loginRedirectText;
     Button signupButton;
-    //FirebaseDatabase database;   Fix db
-    //DatabaseReference reference;
+    MileM8Repository repository;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +34,19 @@ public class SignupActivity extends AppCompatActivity {
         signupButton = findViewById(R.id.signup_button);
         loginRedirectText = findViewById(R.id.loginRedirectText);
 
+        repository = MileM8Repository.getRepository(getApplication());
+
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //database = FirebaseDatabase.getInstance();
-                //reference = database.getReference("users");
 
                 String name = signupName.getText().toString();
                 String email = signupEmail.getText().toString();
                 String username = signupUsername.getText().toString();
                 String password = signupPassword.getText().toString();
 
-                //HelperClass helperClass = new HelperClass(name, email, username, password);
-                //reference.child(username).setValue(helperClass);
+                User newUser = new User(username, password);
+                repository.insertUser(newUser);
 
                 Toast.makeText(SignupActivity.this, "Your signup was successful!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);

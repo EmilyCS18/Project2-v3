@@ -13,14 +13,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.project2_v3.MainActivity;
 import com.example.project2_v3.database.entities.MileM8;
 import com.example.project2_v3.database.entities.User;
-import com.example.project2_v3.database.entities.Vehicle;
 import com.example.project2_v3.database.typeConverters.LocalDateTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {MileM8.class, User.class, Vehicle.class}, version = 1, exportSchema = false)
+@Database(entities = {MileM8.class, User.class}, version = 1, exportSchema = false)
 public abstract class MileM8Database extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
@@ -73,5 +72,4 @@ public abstract class MileM8Database extends RoomDatabase {
 
     public abstract UserDAO userDAO();
 
-    public abstract VehicleDAO vehicleDao();
 }
