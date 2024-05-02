@@ -19,6 +19,9 @@
             android:name=".MonthlySummariesActivity"
             android:exported="false" />
         <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewVehiclesActivity"
             android:exported="false" />
         <activity
