@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,11 +26,10 @@ public class EventActivity extends AppCompatActivity {
     private Button timeButton;
     private EditText startingLocationEditText, destinationLocationEditText;
     private Button saveTripButton;
+    private EditText originalOdometerEditText, newOdometerEditText;
+    private TextView mileageDifferenceTextView;
 
-    private TextView selectVehicleTextView;
-    private ArrayList<String> vehicleList = new ArrayList<>();
-    private ArrayAdapter<String> vehicleAdapter;
-    private ListView listView;
+
 
 
     @Override
@@ -59,9 +59,12 @@ public class EventActivity extends AppCompatActivity {
             }
         });
 
-        //Vehicle stuff
-        selectVehicleTextView = findViewById(R.id.select_Vehicle_Text);
-        selectVehicleTextView.setOnClickListener(v -> showVehiclePopup());
+        originalOdometerEditText = findViewById(R.id.original_odometer_type);
+        newOdometerEditText = findViewById(R.id.new_odometer_type);
+        mileageDifferenceTextView = findViewById(R.id.mileageDifferenceTextView);
+
+
+
 
     }
     private void showDatePickerDialog() {
@@ -92,53 +95,21 @@ public class EventActivity extends AppCompatActivity {
     }
 
     private void saveLocationData() {
-        String startingLocation = startingLocationEditText.getText().toString();
-        String destinationLocation = destinationLocationEditText.getText().toString();
+        int originalOdometer = Integer.parseInt(originalOdometerEditText.getText().toString());
+        int newOdometer = Integer.parseInt(newOdometerEditText.getText().toString());
 
-        SharedPreferences sharedPreferences = getSharedPreferences("TripData", MODE_PRIVATE);
+        // Calculate the mileage
+        int mileageDifference = newOdometer - originalOdometer;
+
+        // Display the mileage difference using TextView
+        mileageDifferenceTextView.setText("Mileage of Trip: " + mileageDifference + " miles");
+
+        // Save the mileage difference
+        SharedPreferences sharedPreferences = getSharedPreferences("MileageData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("StartingLocation", startingLocation);
-        editor.putString("DestinationLocation", destinationLocation);
-        editor.apply(); // Use apply() instead of commit() for asynchronous data saving
+        editor.putInt("lastMileageDifference", mileageDifference);
+        editor.apply();
     }
 
-     //vehicles stuff
-     private void showVehiclePopup() {
-         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-         LayoutInflater inflater = this.getLayoutInflater();
-         View dialogView = inflater.inflate(R.layout.popup_select_vehicle, null);
-         builder.setView(dialogView);
 
-         listView = dialogView.findViewById(R.id.list_vehicles);
-         EditText newVehicleName = dialogView.findViewById(R.id.new_vehicle_name);
-         Button addVehicleButton = dialogView.findViewById(R.id.add_vehicle_button);
-
-         // Initialize and set the adapter for the ListView
-         vehicleAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, vehicleList);
-         listView.setAdapter(vehicleAdapter);
-
-         // Load existing vehicles
-         loadVehicles();
-
-         // Add new vehicle button logic
-         addVehicleButton.setOnClickListener(v -> {
-             String vehicle = newVehicleName.getText().toString();
-             if (!vehicle.isEmpty()) {
-                 vehicleList.add(vehicle);
-                 vehicleAdapter.notifyDataSetChanged();
-                 newVehicleName.setText(""); // Clear the input field
-             }
-         });
-
-         AlertDialog dialog = builder.create();
-         dialog.show();
-     }
-
-    private void loadVehicles() {
-        // Dummy data, replace this with actual data loading logic
-        vehicleList.add("Car");
-        vehicleList.add("Truck");
-        vehicleList.add("Motorcycle");
-        vehicleAdapter.notifyDataSetChanged();
-    }
 }
