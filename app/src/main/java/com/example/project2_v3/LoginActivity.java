@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     static final String SAVED_PREFERENCE_USERID_KEY = "com.example.project2_v3.SHARED_PREFERENCE_USERID_KEY";
     private static final int LOGGED_OUT = -1;
     private MileM8Repository repository;
+
     private int loggedInUserId = -1;
     private User user;
     ActivityLoginBinding binding;
@@ -35,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         repository = MileM8Repository.getRepository(getApplication());
-        //repository.getUserbyUserId(loggedInUserId).observe(this, Mil);
+        //repository.getUserbyUserId(loggedInUserId).observe(this, MileM8Repository);
 
         binding.signupRedirectTextTextView.setOnClickListener(v -> {
             loginUser(savedInstanceState);

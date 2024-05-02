@@ -14,6 +14,7 @@ public class LandingActivity extends AppCompatActivity {
     private Button vehicleButton;
     private Button adminButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

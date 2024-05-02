@@ -10,6 +10,7 @@ import com.example.project2_v3.database.entities.MileM8;
 import com.example.project2_v3.database.entities.User;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -21,11 +22,12 @@ public class MileM8Repository {
     public static MileM8Repository repository;
 
 
-    private MileM8Repository(Application application){
+    public MileM8Repository(Application application){
         MileM8Database db = MileM8Database.getDatabase(application);
         this.milem8DAO = db.milem8DAO();
         this.userDAO = db.userDAO();
         this.allMiles = (ArrayList<MileM8>) this.milem8DAO.getAllRecords();
+
     }
 
     public static MileM8Repository getRepository(Application application){
@@ -86,6 +88,14 @@ public class MileM8Repository {
 
     public LiveData<User> getUserbyUserId(int userId) {
         return userDAO.getUserByUserId(userId);
+    }
+
+    public LiveData<List<MileM8>> getTripsForMonth(String yearMonth) {
+        return milem8DAO.getTripsForMonth(yearMonth);
+    }
+
+    public LiveData<List<MileM8>> getTripsForYear(String year) {
+        return milem8DAO.getTripsForYear(year);
     }
 
 }
