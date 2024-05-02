@@ -3,6 +3,7 @@ package com.example.project2_v3;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,9 @@ import android.widget.Button;
 public class LandingActivity extends AppCompatActivity {
     private Button eventsButton;
     private Button vehicleButton;
+
+    private Button adminButton;
+    boolean isAdmin = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,24 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
+        adminButton = findViewById(R.id.button_LP_admin);
+        adminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingActivity.this, AdminActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+        boolean isAdmin = sharedPreferences.getBoolean("isAdmin", false);
+
+        if (isAdmin) {
+            adminButton.setVisibility(View.VISIBLE);
+        }
+        else {
+            adminButton.setVisibility(View.GONE);
+        }
     }
 
 }

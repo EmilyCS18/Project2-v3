@@ -86,9 +86,10 @@
         android:text="@string/admin_stuff"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_LP_vehicles"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
