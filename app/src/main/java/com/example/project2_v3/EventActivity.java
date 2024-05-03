@@ -2,22 +2,16 @@ package com.example.project2_v3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class EventActivity extends AppCompatActivity {
@@ -63,9 +57,6 @@ public class EventActivity extends AppCompatActivity {
         newOdometerEditText = findViewById(R.id.new_odometer_type);
         mileageDifferenceTextView = findViewById(R.id.mileageDifferenceTextView);
 
-
-
-
     }
     private void showDatePickerDialog() {
         Calendar cal = Calendar.getInstance();
@@ -79,7 +70,7 @@ public class EventActivity extends AppCompatActivity {
                     dateButton.setText(date);
                 }, year, month, day);
         datePickerDialog.show();
-}
+    }
 
     private void showTimePickerDialog() {
         Calendar cal = Calendar.getInstance();
@@ -94,23 +85,36 @@ public class EventActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    //not all fields
     private void saveLocationData() {
         int originalOdometer = Integer.parseInt(originalOdometerEditText.getText().toString());
         int newOdometer = Integer.parseInt(newOdometerEditText.getText().toString());
-
-        // Calculate the mileage
         int mileageDifference = newOdometer - originalOdometer;
-
-        // Display the mileage difference using TextView
         mileageDifferenceTextView.setText(mileageDifference + " miles");
 
-        // Save the mileage difference
-        SharedPreferences sharedPreferences = getSharedPreferences("MileageData", MODE_PRIVATE);
+        // Capture starting and destination locations
+        String startingLocation = startingLocationEditText.getText().toString();
+        String destinationLocation = destinationLocationEditText.getText().toString();
+
+        // toll and parking fee inputs
+        float tollFee = Float.parseFloat(((EditText) findViewById(R.id.toll_fee_type)).getText().toString());
+        float parkingFee = Float.parseFloat(((EditText) findViewById(R.id.parking_fee_type)).getText().toString());
+
+        // Calculate total expenses
+        float totalExpenses = tollFee + parkingFee;
+
+        // Save all data
+        SharedPreferences sharedPreferences = getSharedPreferences("TripData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("lastMileageDifference", mileageDifference);
+        editor.putFloat("TotalExpenses", totalExpenses);
+        editor.putString("StartingLocation", startingLocation);
+        editor.putString("DestinationLocation", destinationLocation);
         editor.apply();
+
+        Toast.makeText(this, "Trip data saved!", Toast.LENGTH_SHORT).show();
     }
+
+
 
 
 }
