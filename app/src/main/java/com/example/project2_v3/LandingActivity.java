@@ -44,7 +44,7 @@ public class LandingActivity extends AppCompatActivity {
         vehicleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LandingActivity.this, VehicleActivity.class);
+                Intent intent = new Intent(LandingActivity.this, AddVehicleActivity.class);
                 startActivity(intent);
             }
         });
