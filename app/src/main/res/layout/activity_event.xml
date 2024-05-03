@@ -85,8 +85,7 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
-                android:layout_marginTop="1dp"
-                android:inputType="textCapSentences"/>
+                android:layout_marginTop="1dp"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -99,8 +98,7 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
-                android:layout_marginTop="20dp"
-                android:inputType="textCapSentences"/>
+                android:layout_marginTop="20dp"/>
 
             <EditText
                 android:id="@+id/original_odometer_type"
@@ -147,7 +145,7 @@
                 android:gravity="center">
 
                 <EditText
-                    android:id="@+id/toll_Fee_EditText"
+                    android:id="@+id/toll_fee_type"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
@@ -156,13 +154,12 @@
                     android:drawableLeft="@drawable/baseline_attach_money_24"
                     android:drawablePadding="8dp"
                     android:hint="Toll Fee"
-                    android:inputType="numberDecimal"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background" />
 
                 <EditText
-                    android:id="@+id/parking_Fee_EditText"
+                    android:id="@+id/parking_fee_type"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
@@ -171,7 +168,6 @@
                     android:drawableLeft="@drawable/baseline_attach_money_24"
                     android:drawablePadding="8dp"
                     android:hint="Parking Fee"
-                    android:inputType="numberDecimal"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background" />
