@@ -22,9 +22,9 @@ public class EventActivity extends AppCompatActivity {
     private Button saveTripButton;
     private EditText originalOdometerEditText, newOdometerEditText;
     private TextView mileageDifferenceTextView;
-
-
-
+    private int mileageDifference;  // Mileage difference as a class member
+    private String selectedDate = "";  // Date selected from DatePicker
+    private String selectedTime = "";  // Time selected from TimePicker
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,20 +44,20 @@ public class EventActivity extends AppCompatActivity {
         saveTripButton.setOnClickListener(v -> saveLocationData());
 
         Button backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(EventActivity.this, LandingActivity.class);
-                startActivity(intent);
-                finish(); // should it be finish or not?
-            }
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(EventActivity.this, LandingActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         originalOdometerEditText = findViewById(R.id.original_odometer_type);
         newOdometerEditText = findViewById(R.id.new_odometer_type);
         mileageDifferenceTextView = findViewById(R.id.mileageDifferenceTextView);
 
+        Button updateMilesButton = findViewById(R.id.update_miles_Button);
+        updateMilesButton.setOnClickListener(v -> updateMileage());
     }
+
     private void showDatePickerDialog() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
@@ -66,8 +66,8 @@ public class EventActivity extends AppCompatActivity {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, yearSelected, monthOfYear, dayOfMonth) -> {
-                    String date = dayOfMonth + "/" + (monthOfYear + 1) + "/" + yearSelected;
-                    dateButton.setText(date);
+                    selectedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + yearSelected;
+                    dateButton.setText(selectedDate);
                 }, year, month, day);
         datePickerDialog.show();
     }
@@ -79,19 +79,24 @@ public class EventActivity extends AppCompatActivity {
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 (view, hourOfDay, minuteOfHour) -> {
-                    String time = hourOfDay + ":" + minuteOfHour;
-                    timeButton.setText(time);
+                    selectedTime = hourOfDay + ":" + minuteOfHour;
+                    timeButton.setText(selectedTime);
                 }, hour, minute, true);
         timePickerDialog.show();
     }
 
-    private void saveLocationData() {
+    private void updateMileage() {
         int originalOdometer = Integer.parseInt(originalOdometerEditText.getText().toString());
         int newOdometer = Integer.parseInt(newOdometerEditText.getText().toString());
-        int mileageDifference = newOdometer - originalOdometer;
+        mileageDifference = newOdometer - originalOdometer;
         mileageDifferenceTextView.setText(mileageDifference + " miles");
+    }
 
-        // Capture starting and destination locations
+    private void saveLocationData() {
+        // Update the mileage first
+        updateMileage();
+
+        // Capture starting and destination locations, and date and time
         String startingLocation = startingLocationEditText.getText().toString();
         String destinationLocation = destinationLocationEditText.getText().toString();
 
@@ -109,12 +114,10 @@ public class EventActivity extends AppCompatActivity {
         editor.putFloat("TotalExpenses", totalExpenses);
         editor.putString("StartingLocation", startingLocation);
         editor.putString("DestinationLocation", destinationLocation);
+        editor.putString("SelectedDate", selectedDate); // Save the date
+        editor.putString("SelectedTime", selectedTime); // Save the time
         editor.apply();
 
         Toast.makeText(this, "Trip data saved!", Toast.LENGTH_SHORT).show();
     }
-
-
-
-
 }
