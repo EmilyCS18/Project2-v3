@@ -85,6 +85,7 @@ public class EventActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
+    //all fields
     private void saveLocationData() {
         int originalOdometer = Integer.parseInt(originalOdometerEditText.getText().toString());
         int newOdometer = Integer.parseInt(newOdometerEditText.getText().toString());
