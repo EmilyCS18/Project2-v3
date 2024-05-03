@@ -119,5 +119,10 @@ public class EventActivity extends AppCompatActivity {
         editor.apply();
 
         Toast.makeText(this, "Trip data saved!", Toast.LENGTH_SHORT).show();
+
+
+        Intent intent = new Intent(EventActivity.this, LandingActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
