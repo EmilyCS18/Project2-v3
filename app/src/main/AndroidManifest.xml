@@ -22,12 +22,6 @@
             android:name=".AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".ViewVehiclesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AddVehicleActivity"
-            android:exported="false" />
-        <activity
             android:name=".VehicleActivity"
             android:exported="false" />
         <activity
