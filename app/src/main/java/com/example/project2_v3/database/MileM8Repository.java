@@ -99,6 +99,10 @@ public class MileM8Repository {
 
     public void deleteUser(User user) {
         MileM8Database.databaseWriteExecutor.execute(() -> {
+            Vehicle vehicle = vehicleDAO.getVehicleByUserId(user.getId()).getValue();
+            if (vehicle != null) {
+                vehicleDAO.delete(vehicle);
+            }
             userDAO.delete(user);
         });
     }
@@ -145,6 +149,12 @@ public class MileM8Repository {
         MileM8Database.databaseWriteExecutor.execute(() ->
         {
             vehicleDAO.insert(vehicle);
+        });
+    }
+
+    public void deleteVehicle(Vehicle vehicle) {
+        MileM8Database.databaseWriteExecutor.execute(() -> {
+            vehicleDAO.delete(vehicle);
         });
     }
 }

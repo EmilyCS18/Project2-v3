@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.project2_v3.database.MileM8Repository;
 import com.example.project2_v3.database.entities.User;
+import com.example.project2_v3.database.entities.Vehicle;
 
 public class AdminActivity extends AppCompatActivity {
     EditText usernameText, passwordText;
@@ -68,6 +69,7 @@ public class AdminActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = usernameText.getText().toString();
                 String password = passwordText.getText().toString();
+                Vehicle vehicle = new Vehicle("My Car", "Car Type");
 
                 if (username.isEmpty()) {
                     Toast.makeText(AdminActivity.this,"Please enter a username.", Toast.LENGTH_SHORT).show();
@@ -86,6 +88,7 @@ public class AdminActivity extends AppCompatActivity {
                             else {
                                 user = new User(username, password);
                                 repository.insertUser(user);
+                                repository.insertVehicle(vehicle);
                                 Toast.makeText(AdminActivity.this, username + " successfully added.", Toast.LENGTH_SHORT).show();
                                 usernameText.setText("");
                                 passwordText.setText("");
@@ -103,6 +106,7 @@ public class AdminActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = usernameText.getText().toString();
                 String password = passwordText.getText().toString();
+                Vehicle vehicle = new Vehicle("My Car", "Car Type");
 
                 if (username.isEmpty()) {
                     Toast.makeText(AdminActivity.this,"Please enter a username.", Toast.LENGTH_SHORT).show();
@@ -122,6 +126,7 @@ public class AdminActivity extends AppCompatActivity {
                                 user = new User(username, password);
                                 user.setAdmin(true);
                                 repository.insertUser(user);
+                                repository.insertVehicle(vehicle);
                                 Toast.makeText(AdminActivity.this, username + " successfully added as admin.", Toast.LENGTH_SHORT).show();
                                 usernameText.setText("");
                                 passwordText.setText("");
