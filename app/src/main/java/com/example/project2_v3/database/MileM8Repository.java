@@ -49,7 +49,7 @@ public class MileM8Repository {
         try{
             return future.get();
         } catch (InterruptedException | ExecutionException e){
-            Log.i(MainActivity.TAG, "Problem getting MileM8Repoitory, thread error.");
+            Log.i(MainActivity.TAG, "Problem getting MileM8Repository, thread error.");
         }
         return null;
     }
@@ -118,6 +118,10 @@ public class MileM8Repository {
             Log.i(MainActivity.TAG,"Problem when getting all vehicles in the repository");
         }
         return null;
+    }
+
+    public LiveData<Vehicle> getVehicleByUserId(int userId) {
+        return vehicleDAO.getVehicleByUserId(userId);
     }
 
     public void insertVehicle(Vehicle vehicle) {
