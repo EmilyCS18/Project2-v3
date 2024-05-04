@@ -54,14 +54,14 @@
 
 
             <EditText
-                android:id="@+id/vehicle_nickname_text"
+                android:id="@+id/admin_username_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/custom_edittext"
                 android:drawableStart="@drawable/baseline_directions_blue_car_24"
                 android:drawablePadding="8dp"
-                android:hint="Nickname"
+                android:hint="Username"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background" />
@@ -69,29 +69,15 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/year_make_model_text"
+                android:id="@+id/admin_password_edittext"
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/baseline_location_pin_24"
                 android:drawablePadding="8dp"
-                android:hint="Year/Make/Model"
+                android:hint="Password"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:layout_marginTop="20dp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:id="@+id/current_odometer_text"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_data_saver_on_24"
-                android:drawablePadding="8dp"
-                android:hint="Current Odometer"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background"
-                android:layout_marginTop="20dp"
-                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,13 +88,47 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:id="@+id/add_vehicle_activity_button"
-                android:text="Save"
+                android:id="@+id/update_password_button"
+                android:text="@string/update_password"
                 android:textSize="18sp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/bright_blue"
                 android:textColor="@color/white"
                 app:cornerRadius="20dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/create_user_button"
+                android:text="@string/create_user"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/bright_blue"
+                android:textColor="@color/white"
+                app:cornerRadius="20dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/create_admin_button"
+                android:text="@string/create_admin"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/bright_blue"
+                android:textColor="@color/white"
+                app:cornerRadius="20dp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/delete_user_button"
+                android:text="@string/delete_user"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/bright_blue"
+                android:textColor="@color/white"
+                app:cornerRadius="20dp"/>
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.project2_v3.database.entities.User;
 
@@ -18,7 +19,7 @@ public interface UserDAO {
     
     @Delete
     void delete(User user);
-    
+
     @Query("SELECT * FROM " + MileM8Database.USER_TABLE + " ORDER BY username")
     LiveData<List<User>> getALLUsers();
 
@@ -30,4 +31,6 @@ public interface UserDAO {
     @Query("SELECT * from " + MileM8Database.USER_TABLE + " WHERE id == :userId" )
     LiveData<User> getUserByUserId(int userId);
 
+    @Update
+    void update(User user);
 }
