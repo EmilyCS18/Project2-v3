@@ -19,7 +19,7 @@ public class LandingActivity extends AppCompatActivity {
 
     private Button tempButton;
 
-
+//TODO: Issue with SessionToken???
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
