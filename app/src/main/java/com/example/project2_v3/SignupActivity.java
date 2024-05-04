@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project2_v3.database.MileM8Repository;
 import com.example.project2_v3.database.entities.User;
+import com.example.project2_v3.database.entities.Vehicle;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -46,7 +47,9 @@ public class SignupActivity extends AppCompatActivity {
                 String password = signupPassword.getText().toString();
 
                 User newUser = new User(username, password);
+                Vehicle newVehicle = new Vehicle(newUser.getId(),"My Car", "Car Type");
                 repository.insertUser(newUser);
+                repository.insertVehicle(newVehicle);
 
                 Toast.makeText(SignupActivity.this, "Your signup was successful!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
