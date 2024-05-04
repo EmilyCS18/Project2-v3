@@ -16,9 +16,10 @@ import com.example.project2_v3.database.entities.MileM8;
 import java.util.List;
 
 public class ReportsActivity extends AppCompatActivity {
+    //TODO: fix the user specific data, data is being shared with all users
 
     private TextView totalTripsTextView, totalMilesTextView, totalExpensesTextView;
-    private MileM8Repository repository;
+    private MileM8Repository  repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
