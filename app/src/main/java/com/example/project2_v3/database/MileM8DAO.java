@@ -39,4 +39,7 @@ public interface MileM8DAO {
     // Retrieve trips for a specific year
     @Query("SELECT * FROM mileM8Table WHERE strftime('%Y', date / 1000, 'unixepoch') = :year")
     LiveData<List<MileM8>> getTripsForYear(String year);
+
+    @Query("DELETE FROM " + MileM8Database.MILE_M_8_TABLE)
+    void deleteAllMileM8();
 }

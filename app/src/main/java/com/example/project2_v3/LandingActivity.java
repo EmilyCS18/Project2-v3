@@ -1,70 +1,67 @@
 package com.example.project2_v3;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.example.project2_v3.database.MileM8Database;
+
+import java.util.concurrent.Executors;
 
 public class LandingActivity extends AppCompatActivity {
     private Button eventsButton;
     private Button reportsButton;
     private Button vehicleButton;
     private Button adminButton;
-    //Before fixing LandingPage
-
+    private Button logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
 
+        // Initialize buttons
         eventsButton = findViewById(R.id.button_LP_events);
-
-        // Set OnClickListener for the Events Button
-        eventsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LandingActivity.this, EventActivity.class);
-                startActivity(intent);
-            }
-        });
-
         reportsButton = findViewById(R.id.button_LP_reports);
-        reportsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LandingActivity.this, ReportsActivity.class);
-                startActivity(intent);
-            }
-        });
-
         vehicleButton = findViewById(R.id.button_LP_vehicles);
-        vehicleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LandingActivity.this, VehicleActivity.class);
-                startActivity(intent);
-            }
-        });
-
         adminButton = findViewById(R.id.button_LP_admin);
-        adminButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LandingActivity.this, AdminActivity.class);
-                startActivity(intent);
-            }
-        });
+        logoutButton = findViewById(R.id.button_LP_logout);
 
+        // Set onClickListeners for each button
+        eventsButton.setOnClickListener(v -> startActivity(new Intent(LandingActivity.this, EventActivity.class)));
+        reportsButton.setOnClickListener(v -> startActivity(new Intent(LandingActivity.this, ReportsActivity.class)));
+        vehicleButton.setOnClickListener(v -> startActivity(new Intent(LandingActivity.this, VehicleActivity.class)));
+        adminButton.setOnClickListener(v -> startActivity(new Intent(LandingActivity.this, AdminActivity.class)));
+        logoutButton.setOnClickListener(v -> logoutUser());
+
+        // Update visibility of admin button based on user permissions
         updateAdminButtonVis();
     }
-    private void updateAdminButtonVis() {
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedprefrence_file_key), MODE_PRIVATE);
-        boolean isAdmin = sharedPreferences.getBoolean(getString(R.string.preference_isAdmin_key), false);
 
+    private void logoutUser() {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            // Get the database instance
+            MileM8Database db = MileM8Database.getDatabase(getApplicationContext());
+
+            // Clear session-specific data only
+            db.sessionTokenDAO().clearSessionTokens();
+
+            // Run on the UI thread to update UI components
+            runOnUiThread(() -> {
+                // Redirect to LoginActivity
+                Intent intent = new Intent(LandingActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  // Clear the activity stack
+                startActivity(intent);
+                finish();  // Ensure this activity is finished so user can't return with back button
+            });
+        });
+    }
+
+
+    private void updateAdminButtonVis() {
+        // This function should update the visibility of the Admin button based on whether the user is an admin
+        boolean isAdmin = false;  // Placeholder for actual admin check
         if (isAdmin) {
             adminButton.setVisibility(View.VISIBLE);
         } else {

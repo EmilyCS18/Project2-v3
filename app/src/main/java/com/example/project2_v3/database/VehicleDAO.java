@@ -22,4 +22,8 @@ public interface VehicleDAO {
 
     @Query("SELECT * from " + MileM8Database.VEHICLE_TABLE + " WHERE id == :userId" )
     LiveData<Vehicle> getVehicleByUserId(int userId);
+
+    @Query("DELETE FROM " + MileM8Database.VEHICLE_TABLE)
+    void deleteAllVehicles();
+
 }
