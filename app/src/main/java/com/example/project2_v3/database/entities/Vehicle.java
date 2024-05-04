@@ -12,13 +12,10 @@ public class Vehicle {
     @PrimaryKey(autoGenerate = true)
 
     private int id;
-
-    private int userId;
     private String name;
     private String type;
 
-    public Vehicle(int userId, String name, String type) {
-        this.userId = userId;
+    public Vehicle(String name, String type) {
         this.name = name;
         this.type = type;
     }
@@ -29,14 +26,6 @@ public class Vehicle {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getName() {
@@ -60,11 +49,11 @@ public class Vehicle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vehicle vehicle = (Vehicle) o;
-        return id == vehicle.id && userId == vehicle.userId && Objects.equals(name, vehicle.name) && Objects.equals(type, vehicle.type);
+        return id == vehicle.id && Objects.equals(name, vehicle.name) && Objects.equals(type, vehicle.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, name, type);
+        return Objects.hash(id, name, type);
     }
 }
