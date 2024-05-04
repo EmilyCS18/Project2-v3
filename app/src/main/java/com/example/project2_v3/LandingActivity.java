@@ -17,6 +17,9 @@ public class LandingActivity extends AppCompatActivity {
     private Button logoutButton;
     private int userId;
 
+    private Button tempButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,15 @@ public class LandingActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(v -> logoutUser());
 
         updateAdminButtonVis();
+
+        tempButton = findViewById(R.id.temp_admin_button_DELETE);
+        tempButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingActivity.this, AdminActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void logoutUser() {

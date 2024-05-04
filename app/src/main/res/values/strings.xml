@@ -22,4 +22,8 @@
     <string name="preference_userId_key">mileM8PreferenceUserIdKeyMileM8</string>
     <string name="admin">Admin</string>
     <string name="preference_isAdmin_key">isAdmin</string>
+    <string name="create_admin">Create Admin</string>
+    <string name="delete_user">Delete User</string>
+    <string name="create_user">Create User</string>
+    <string name="update_password">Update Password</string>
 </resources>
