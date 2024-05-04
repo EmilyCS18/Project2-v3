@@ -47,7 +47,7 @@ public class SignupActivity extends AppCompatActivity {
                 String password = signupPassword.getText().toString();
 
                 User newUser = new User(username, password);
-                Vehicle newVehicle = new Vehicle(newUser.getId(),"My Car", "Car Type");
+                Vehicle newVehicle = new Vehicle("My Car", "Car Type");
                 repository.insertUser(newUser);
                 repository.insertVehicle(newVehicle);
 
