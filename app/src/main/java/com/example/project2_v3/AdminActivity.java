@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,16 @@ public class AdminActivity extends AppCompatActivity {
         usernameText = findViewById(R.id.admin_username_edittext);
         passwordText = findViewById(R.id.admin_password_edittext);
         repository = MileM8Repository.getRepository(getApplication());
+
+        Button backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminActivity.this, LandingActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         Button updatePasswordButton = findViewById(R.id.update_password_button);
         updatePasswordButton.setOnClickListener(new View.OnClickListener() {

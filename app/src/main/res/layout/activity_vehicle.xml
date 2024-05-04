@@ -41,7 +41,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="New Vehicle"
+                android:text="Vehicle"
                 android:id="@+id/newEventText"
                 android:textSize="36sp"
                 android:textAlignment="center"
@@ -92,7 +92,7 @@
                 android:id="@+id/add_vehicle_activity_button"
                 android:text="Save"
                 android:textSize="18sp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:backgroundTint="@color/bright_blue"
                 android:textColor="@color/white"
                 app:cornerRadius="20dp"/>
