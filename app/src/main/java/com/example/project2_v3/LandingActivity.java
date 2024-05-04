@@ -15,11 +15,15 @@ public class LandingActivity extends AppCompatActivity {
     private Button vehicleButton;
     private Button adminButton;
     private Button logoutButton;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
+
+        // Retrieve the user ID from the intent
+        userId = getIntent().getIntExtra("USER_ID", -1);
 
         // Initialize buttons
         eventsButton = findViewById(R.id.button_LP_events);
@@ -28,20 +32,34 @@ public class LandingActivity extends AppCompatActivity {
         adminButton = findViewById(R.id.button_LP_admin);
         logoutButton = findViewById(R.id.button_LP_logout);
 
-        // Set onClickListeners for each button
-        eventsButton.setOnClickListener(v -> startActivity(new Intent(LandingActivity.this, EventActivity.class)));
-        reportsButton.setOnClickListener(v -> startActivity(new Intent(LandingActivity.this, ReportsActivity.class)));
-        vehicleButton.setOnClickListener(v -> startActivity(new Intent(LandingActivity.this, VehicleActivity.class)));
-        adminButton.setOnClickListener(v -> startActivity(new Intent(LandingActivity.this, AdminActivity.class)));
+        // Set onClickListeners for each button and pass the user ID
+        eventsButton.setOnClickListener(v -> {
+            Intent eventIntent = new Intent(LandingActivity.this, EventActivity.class);
+            eventIntent.putExtra("USER_ID", userId);
+            startActivity(eventIntent);
+        });
+        reportsButton.setOnClickListener(v -> {
+            Intent reportIntent = new Intent(LandingActivity.this, ReportsActivity.class);
+            reportIntent.putExtra("USER_ID", userId);
+            startActivity(reportIntent);
+        });
+        vehicleButton.setOnClickListener(v -> {
+            Intent vehicleIntent = new Intent(LandingActivity.this, VehicleActivity.class);
+            vehicleIntent.putExtra("USER_ID", userId);
+            startActivity(vehicleIntent);
+        });
+        adminButton.setOnClickListener(v -> {
+            Intent adminIntent = new Intent(LandingActivity.this, AdminActivity.class);
+            adminIntent.putExtra("USER_ID", userId);
+            startActivity(adminIntent);
+        });
         logoutButton.setOnClickListener(v -> logoutUser());
 
-        // Update visibility of admin button based on user permissions
         updateAdminButtonVis();
     }
 
     private void logoutUser() {
         Executors.newSingleThreadExecutor().execute(() -> {
-            // Get the database instance
             MileM8Database db = MileM8Database.getDatabase(getApplicationContext());
 
             // Clear session-specific data only
@@ -49,7 +67,6 @@ public class LandingActivity extends AppCompatActivity {
 
             // Run on the UI thread to update UI components
             runOnUiThread(() -> {
-                // Redirect to LoginActivity
                 Intent intent = new Intent(LandingActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);  // Clear the activity stack
                 startActivity(intent);
@@ -58,10 +75,9 @@ public class LandingActivity extends AppCompatActivity {
         });
     }
 
-
     private void updateAdminButtonVis() {
         // This function should update the visibility of the Admin button based on whether the user is an admin
-        boolean isAdmin = false;  // Placeholder for actual admin check
+        boolean isAdmin = false;
         if (isAdmin) {
             adminButton.setVisibility(View.VISIBLE);
         } else {
