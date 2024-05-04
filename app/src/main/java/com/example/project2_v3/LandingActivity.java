@@ -13,6 +13,7 @@ public class LandingActivity extends AppCompatActivity {
     private Button reportsButton;
     private Button vehicleButton;
     private Button adminButton;
+    //Before fixing LandingPage
 
 
     @Override
