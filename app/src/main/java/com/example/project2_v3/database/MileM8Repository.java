@@ -91,6 +91,12 @@ public class MileM8Repository {
         });
     }
 
+    public void updateUser(User user) {
+        MileM8Database.databaseWriteExecutor.execute(() -> {
+            userDAO.update(user);
+        });
+    }
+
     public LiveData<User> getUserbyUserName(String username) {
         return userDAO.getUserByUserName(username);
     }

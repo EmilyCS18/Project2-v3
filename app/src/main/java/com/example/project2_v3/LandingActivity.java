@@ -14,6 +14,8 @@ public class LandingActivity extends AppCompatActivity {
     private Button vehicleButton;
     private Button adminButton;
 
+    private Button tempButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,15 @@ public class LandingActivity extends AppCompatActivity {
         });
 
         updateAdminButtonVis();
+
+        tempButton = findViewById(R.id.temp_admin_button_DELETE);
+        tempButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LandingActivity.this, AdminActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private void updateAdminButtonVis() {
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedprefrence_file_key), MODE_PRIVATE);
