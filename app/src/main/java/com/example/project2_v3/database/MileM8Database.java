@@ -12,6 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.project2_v3.MainActivity;
 import com.example.project2_v3.database.entities.MileM8;
+import com.example.project2_v3.database.entities.SessionToken;
 import com.example.project2_v3.database.entities.User;
 import com.example.project2_v3.database.entities.Vehicle;
 import com.example.project2_v3.database.typeConverters.LocalDateTypeConverter;
@@ -20,7 +21,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {MileM8.class, User.class, Vehicle.class}, version = 1, exportSchema = false)
+@Database(entities = {MileM8.class, User.class, Vehicle.class, SessionToken.class}, version = 2, exportSchema = false)
 public abstract class MileM8Database extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
@@ -34,7 +35,7 @@ public abstract class MileM8Database extends RoomDatabase {
 
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static MileM8Database getDatabase(final Context context){
+    public static MileM8Database getDatabase(final Context context){
         if(INSTANCE == null){
             synchronized (MileM8Database.class){
                 if(INSTANCE == null){
@@ -74,10 +75,19 @@ public abstract class MileM8Database extends RoomDatabase {
         }
     };
 
+    public void clearNonUserData() {
+        vehicleDAO().deleteAllVehicles();
+        milem8DAO().deleteAllMileM8();
+        // Add similar lines for other DAOs if needed
+    }
+
+
     public abstract MileM8DAO milem8DAO();
 
     public abstract UserDAO userDAO();
 
     public abstract VehicleDAO vehicleDAO();
+
+    public abstract SessionTokenDAO sessionTokenDAO();
 
 }
