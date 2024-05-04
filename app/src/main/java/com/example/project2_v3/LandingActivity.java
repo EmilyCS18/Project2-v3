@@ -28,7 +28,7 @@ public class LandingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LandingActivity.this, EventActivity.class);
                 startActivity(intent);
-    }
+            }
         });
 
         reportsButton = findViewById(R.id.button_LP_reports);
@@ -58,15 +58,16 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
-        boolean isAdmin = sharedPreferences.getBoolean("isAdmin", false);
+        updateAdminButtonVis();
+    }
+    private void updateAdminButtonVis() {
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.sharedprefrence_file_key), MODE_PRIVATE);
+        boolean isAdmin = sharedPreferences.getBoolean(getString(R.string.preference_isAdmin_key), false);
 
         if (isAdmin) {
             adminButton.setVisibility(View.VISIBLE);
-        }
-        else {
-            adminButton.setVisibility(View.GONE);
+        } else {
+            adminButton.setVisibility(View.INVISIBLE);
         }
     }
-
 }

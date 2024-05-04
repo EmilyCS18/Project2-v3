@@ -13,13 +13,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.project2_v3.MainActivity;
 import com.example.project2_v3.database.entities.MileM8;
 import com.example.project2_v3.database.entities.User;
+import com.example.project2_v3.database.entities.Vehicle;
 import com.example.project2_v3.database.typeConverters.LocalDateTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {MileM8.class, User.class}, version = 1, exportSchema = false)
+@Database(entities = {MileM8.class, User.class, Vehicle.class}, version = 1, exportSchema = false)
 public abstract class MileM8Database extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
@@ -58,12 +59,17 @@ public abstract class MileM8Database extends RoomDatabase {
             Log.i(MainActivity.TAG, "DATABASE CREATED!! ");
             databaseWriteExecutor.execute(() -> {
                 UserDAO dao = INSTANCE.userDAO();
+                VehicleDAO vdao = INSTANCE.vehicleDAO();
                 dao.deleteAll();
                 User admin = new User("admin1", "admin1");
                 admin.setAdmin(true);
                 dao.insert(admin);
+                Vehicle vehicle1 = new Vehicle(admin.getId(),"My Car", " ");
+                vdao.insert(vehicle1);
                 User testUser1 = new User ("testuser1", "testuser1");
                 dao.insert(testUser1);
+                Vehicle vehicle2 = new Vehicle(testUser1.getId(),"My Car"," ");
+                vdao.insert(vehicle2);
             });
         }
     };
@@ -71,5 +77,7 @@ public abstract class MileM8Database extends RoomDatabase {
     public abstract MileM8DAO milem8DAO();
 
     public abstract UserDAO userDAO();
+
+    public abstract VehicleDAO vehicleDAO();
 
 }
