@@ -54,7 +54,12 @@ public class MileM8Repository {
         return null;
     }
 
-    public ArrayList<MileM8> getAllMiles() {
+    public LiveData<List<MileM8>> getAllMilesLiveData() {
+        return milem8DAO.getAllTrips();
+    }
+
+
+    /*public ArrayList<MileM8> getAllMiles() {
         Future<ArrayList<MileM8>> future = MileM8Database.databaseWriteExecutor.submit(
                 new Callable<ArrayList<MileM8>>() {
                     @Override
@@ -70,7 +75,7 @@ public class MileM8Repository {
         }
         return null;
 
-    }
+    }*/
 
     public void insertMileM8(MileM8 mileM8){
         MileM8Database.databaseWriteExecutor.execute(()->

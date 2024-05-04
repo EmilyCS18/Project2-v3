@@ -85,7 +85,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
-                android:layout_marginTop="1dp"/>
+                android:layout_marginTop="1dp"
+                android:inputType="textCapSentences"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -98,7 +99,8 @@
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:inputType="textCapSentences"/>
 
             <EditText
                 android:id="@+id/original_odometer_type"
@@ -154,6 +156,7 @@
                     android:drawableLeft="@drawable/baseline_attach_money_24"
                     android:drawablePadding="8dp"
                     android:hint="Toll Fee"
+                    android:inputType="numberDecimal"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background" />
@@ -168,6 +171,7 @@
                     android:drawableLeft="@drawable/baseline_attach_money_24"
                     android:drawablePadding="8dp"
                     android:hint="Parking Fee"
+                    android:inputType="numberDecimal"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background" />
@@ -197,22 +201,39 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:text="120000"
+                    android:text="0 miles"
                     android:textColor="@color/bright_blue"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:drawablePadding="8dp"/>
             </LinearLayout>
 
-            <Button
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:id="@+id/save_trip_button"
-                android:text="Save Trip"
-                android:textSize="18sp"
-                android:layout_marginTop="0dp"
-                android:backgroundTint="@color/bright_blue"
-                app:cornerRadius="20dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <Button
+                    android:id="@+id/update_miles_Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Update Miles"
+                    android:backgroundTint="@color/bright_blue"
+                    android:layout_marginEnd="10dp"
+                    />
+
+                <Button
+                    android:id="@+id/save_trip_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Save Trip"
+                    android:backgroundTint="@color/bright_blue"
+                    android:layout_marginStart="10dp"/>
+            </LinearLayout>
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
