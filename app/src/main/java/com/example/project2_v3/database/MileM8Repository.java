@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.example.project2_v3.MainActivity;
 import com.example.project2_v3.database.entities.MileM8;
 import com.example.project2_v3.database.entities.User;
+import com.example.project2_v3.database.entities.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,9 @@ import java.util.concurrent.Future;
 public class MileM8Repository {
     private final MileM8DAO milem8DAO;
     private final UserDAO userDAO;
+    private final VehicleDAO vehicleDAO;
     private ArrayList<MileM8> allMiles;
+    private ArrayList<Vehicle> allVehicles;
     public static MileM8Repository repository;
 
 
@@ -26,6 +29,7 @@ public class MileM8Repository {
         MileM8Database db = MileM8Database.getDatabase(application);
         this.milem8DAO = db.milem8DAO();
         this.userDAO = db.userDAO();
+        this.vehicleDAO = db.vehicleDAO();
         this.allMiles = (ArrayList<MileM8>) this.milem8DAO.getAllRecords();
 
     }
@@ -45,7 +49,7 @@ public class MileM8Repository {
         try{
             return future.get();
         } catch (InterruptedException | ExecutionException e){
-            Log.i(MainActivity.TAG, "Problem getting MileM8Repoitory, thread error.");
+            Log.i(MainActivity.TAG, "Problem getting MileM8Repository, thread error.");
         }
         return null;
     }
@@ -103,4 +107,32 @@ public class MileM8Repository {
         return milem8DAO.getTripsForYear(year);
     }
 
+    public ArrayList<Vehicle> getAllVehicles() {
+        Future<ArrayList<Vehicle>> future = MileM8Database.databaseWriteExecutor.submit(
+                new Callable<ArrayList<Vehicle>>() {
+                    @Override
+                    public ArrayList<Vehicle> call() throws Exception {
+                        return null;
+                    }
+                }
+        );
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            Log.i(MainActivity.TAG,"Problem when getting all vehicles in the repository");
+        }
+        return null;
+    }
+
+    public LiveData<Vehicle> getVehicleByUserId(int userId) {
+        return vehicleDAO.getVehicleByUserId(userId);
+    }
+
+    public void insertVehicle(Vehicle vehicle) {
+        MileM8Database.databaseWriteExecutor.execute(() ->
+        {
+            vehicleDAO.insert(vehicle);
+        });
+    }
 }

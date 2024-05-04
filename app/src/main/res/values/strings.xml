@@ -20,4 +20,6 @@
     <string name="not_yet_registered_signup_now">Not Yet Registered? Signup Now</string>
     <string name="sharedprefrence_file_key">mileM8PreferenceFileNameMileoM8</string>
     <string name="preference_userId_key">mileM8PreferenceUserIdKeyMileM8</string>
+    <string name="admin">Admin</string>
+    <string name="preference_isAdmin_key">isAdmin</string>
 </resources>

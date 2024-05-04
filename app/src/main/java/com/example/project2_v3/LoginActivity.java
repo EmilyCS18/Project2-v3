@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private int loggedInUserId = -1;
     private User user;
+    private boolean isAdmin;
     ActivityLoginBinding binding;
     public static final String TAG = "EJ_MILE_M8";
 
@@ -68,6 +69,8 @@ public class LoginActivity extends AppCompatActivity {
         userObserver.observe(this, user -> {
             this.user = user;
             if(this.user != null){
+                isAdmin = user.isAdmin();
+                updateAdminStatusInSharedPreferences();
                 invalidateOptionsMenu();
             }
         });
@@ -104,6 +107,13 @@ public class LoginActivity extends AppCompatActivity {
         sharedPrefEditor.putInt(getString(R.string.preference_userId_key), loggedInUserId);
         sharedPrefEditor.apply();
 
+    }
+
+    private void updateAdminStatusInSharedPreferences() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.sharedprefrence_file_key),Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(getString(R.string.preference_isAdmin_key),isAdmin);
+        editor.apply();
     }
 
     private void toastMaker(String message) {
