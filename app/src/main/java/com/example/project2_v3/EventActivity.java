@@ -25,10 +25,10 @@ public class EventActivity extends AppCompatActivity {
     private Button saveTripButton;
     private EditText originalOdometerEditText, newOdometerEditText;
     private TextView mileageDifferenceTextView;
-    private int mileageDifference;  // Mileage difference as a class member
-    private String selectedDate = "";  // Date selected from DatePicker
-    private String selectedTime = "";  // Time selected from TimePicker
-    private int userId;  // User ID to keep track of the logged-in user
+    private int mileageDifference;
+    private String selectedDate = "";
+    private String selectedTime = "";
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,10 @@ public class EventActivity extends AppCompatActivity {
 
         // Retrieve user ID from intent
         userId = getIntent().getIntExtra("USER_ID", -1); // Default to -1 if not found
-
+        if (userId == -1) {
+            Toast.makeText(this, "Error: User ID not received!", Toast.LENGTH_LONG).show();
+            return;
+        }
         dateButton = findViewById(R.id.datePickerButton);
         timeButton = findViewById(R.id.timePickerButton);
         startingLocationEditText = findViewById(R.id.starting_location);
