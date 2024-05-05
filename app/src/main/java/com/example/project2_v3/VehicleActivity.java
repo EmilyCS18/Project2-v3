@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,11 +27,11 @@ public class VehicleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle);
 
-        userId = getIntent().getIntExtra("USER_ID",-1);
-
         carNameText = findViewById(R.id.car_name_text);
         carTypeText = findViewById(R.id.year_make_model_text);
         repository = MileM8Repository.getRepository(getApplication());
+
+        userId = getUserIdFromSharedPreferences();
 
         setVehicleText();
 
@@ -79,5 +81,10 @@ public class VehicleActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private int getUserIdFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.sharedprefrence_file_key), Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(getString(R.string.preference_userId_key), -1);
     }
 }

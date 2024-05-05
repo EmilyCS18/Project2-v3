@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,12 +37,8 @@ public class EventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
 
-        // Retrieve user ID from intent
-        userId = getIntent().getIntExtra("USER_ID", -1); // Default to -1 if not found
-        if (userId == -1) {
-            Toast.makeText(this, "Error: User ID not received!", Toast.LENGTH_LONG).show();
-            return;
-        }
+        userId = getUserIdFromSharedPreferences();
+
         dateButton = findViewById(R.id.datePickerButton);
         timeButton = findViewById(R.id.timePickerButton);
         startingLocationEditText = findViewById(R.id.starting_location);
@@ -119,5 +117,10 @@ public class EventActivity extends AppCompatActivity {
         Intent intent = new Intent(EventActivity.this, LandingActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private int getUserIdFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.sharedprefrence_file_key), Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(getString(R.string.preference_userId_key), -1);
     }
 }
