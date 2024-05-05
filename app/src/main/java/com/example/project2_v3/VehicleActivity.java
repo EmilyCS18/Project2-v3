@@ -2,7 +2,6 @@ package com.example.project2_v3;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.project2_v3.database.MileM8Database;
 import com.example.project2_v3.database.MileM8Repository;
 import com.example.project2_v3.database.entities.Vehicle;
 
@@ -19,11 +17,15 @@ public class VehicleActivity extends AppCompatActivity {
 
     EditText carNameText, carTypeText;
     MileM8Repository repository;
+    private int userId;
+    private LiveData<Vehicle> vehicleLiveData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle);
+
+        userId = getIntent().getIntExtra("USER_ID",-1);
 
         carNameText = findViewById(R.id.car_name_text);
         carTypeText = findViewById(R.id.year_make_model_text);
@@ -53,34 +55,24 @@ public class VehicleActivity extends AppCompatActivity {
                     Toast.makeText(VehicleActivity.this, "Please enter a type.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    LiveData<Vehicle> vehicleLiveData = repository.getVehicleByUserId(1);
-                    vehicleLiveData.observe(VehicleActivity.this, new Observer<Vehicle>() {
-                        @Override
-                        public void onChanged(Vehicle vehicle) {
-
-                        }
-                    });
+                    Vehicle vehicle = new Vehicle(name,type);
+                    repository.updateVehicle(vehicle);
                 }
             }
         });
-
         setVehicleText();
     }
 
     private void setVehicleText() {
-        LiveData<Vehicle> vehicleLiveData = repository.getVehicleByUserId(1);
-        vehicleLiveData.observe(this, new Observer<Vehicle>() {
-            @Override
-            public void onChanged(Vehicle vehicle) {
-                if (vehicle != null) {
-                    carNameText.setText(vehicle.getName());
-                    carTypeText.setText(vehicle.getType());
-                }
-                else {
-                    carNameText.setText(R.string.my_car);
-                    carTypeText.setText(R.string.car_type);
-                }
-            }
-        });
+        vehicleLiveData = repository.getVehicleByUserId(userId);
+        Vehicle vehicle = vehicleLiveData.getValue();
+        if (vehicle != null) {
+            carNameText.setText(vehicle.getName());
+            carTypeText.setText(vehicle.getType());
+        }
+        else {
+            carNameText.setText(R.string.my_car);
+            carTypeText.setText(R.string.car_type);
+        }
     }
 }
