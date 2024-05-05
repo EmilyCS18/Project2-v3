@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.project2_v3.database.entities.Vehicle;
 
@@ -28,4 +29,10 @@ public interface VehicleDAO {
 
     @Delete
     void delete(Vehicle vehicle);
+
+   @Update
+    void update(Vehicle vehicle);
+
+   @Query("UPDATE " + MileM8Database.VEHICLE_TABLE + " SET name = :name, type = :type WHERE id = :userId")
+    void updateVehicleByUserId(int userId, String name, String type);
 }

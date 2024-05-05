@@ -157,4 +157,10 @@ public class MileM8Repository {
             vehicleDAO.delete(vehicle);
         });
     }
+
+    public void updateVehicleByUserId(int userId, String name, String type) {
+        MileM8Database.databaseWriteExecutor.execute(() -> {
+            vehicleDAO.updateVehicleByUserId(userId,name,type);
+        });
+    }
 }

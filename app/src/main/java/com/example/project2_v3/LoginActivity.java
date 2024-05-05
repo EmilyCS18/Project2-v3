@@ -1,12 +1,9 @@
 package com.example.project2_v3;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +12,6 @@ import androidx.lifecycle.LiveData;
 import com.example.project2_v3.database.MileM8Repository;
 import com.example.project2_v3.database.entities.User;
 import com.example.project2_v3.databinding.ActivityLoginBinding;
-import com.example.project2_v3.databinding.ActivityMainBinding;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String LOGIN_ACTIVITY_USER_ID = "com.example.project2_v3.LOGIN_ACTIVITY_USER_ID";
