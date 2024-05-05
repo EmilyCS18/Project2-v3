@@ -71,7 +71,7 @@
         android:layout_height="75dp"
         android:layout_marginTop="25dp"
         android:backgroundTint="#006FC6"
-        android:text="@string/vehicles"
+        android:text="@string/vehicle"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,18 +91,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_LP_vehicles"
         tools:visibility="visible" />
-
-    <Button
-        android:id="@+id/temp_admin_button_DELETE"
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="25dp"
-        android:backgroundTint="#008FFF"
-        android:text="@string/admin"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_LP_vehicles" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
