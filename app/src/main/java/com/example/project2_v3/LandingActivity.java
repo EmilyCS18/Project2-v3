@@ -62,15 +62,6 @@ public class LandingActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(v -> logoutUser());
 
         updateAdminButtonVis();
-
-        tempButton = findViewById(R.id.temp_admin_button_DELETE);
-        tempButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LandingActivity.this, AdminActivity.class).putExtra("USER_ID", userId);
-                startActivity(intent);
-            }
-        });
     }
 
     private void logoutUser() {
@@ -79,6 +70,8 @@ public class LandingActivity extends AppCompatActivity {
 
             // Clear session-specific data only
             db.sessionTokenDAO().clearSessionTokens();
+
+            clearUserIdFromSharedPreferences();
 
             // Run on the UI thread to update UI components
             runOnUiThread(() -> {
@@ -99,5 +92,12 @@ public class LandingActivity extends AppCompatActivity {
         } else {
             adminButton.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void clearUserIdFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.sharedprefrence_file_key),Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(getString(R.string.preference_userId_key), -1);
+        editor.apply();
     }
 }

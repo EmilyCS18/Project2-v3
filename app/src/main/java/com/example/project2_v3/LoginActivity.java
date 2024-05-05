@@ -65,8 +65,6 @@ public class LoginActivity extends AppCompatActivity {
         userObserver.observe(this, user -> {
             this.user = user;
             if(this.user != null){
-                isAdmin = user.isAdmin();
-                updateAdminStatusInSharedPreferences();
                 invalidateOptionsMenu();
             }
         });
@@ -84,6 +82,12 @@ public class LoginActivity extends AppCompatActivity {
                 String password = binding.loginPassword.getText().toString();
                 if (password.equals(user.getPassword())) {
                     //save id to shared preference
+                    loggedInUserId = user.getId();
+                    updateSharedPreference();
+
+                    isAdmin = user.isAdmin();
+                    updateAdminStatusInSharedPreferences();
+
                     startActivity(new Intent(LoginActivity.this, LandingActivity.class).putExtra("USER_ID", user.getId()));
                     finish();  // Optional: Close LoginActivity after redirecting
                 } else {
