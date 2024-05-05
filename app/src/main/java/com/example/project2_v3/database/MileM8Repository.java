@@ -158,9 +158,9 @@ public class MileM8Repository {
         });
     }
 
-    public void updateVehicle(Vehicle vehicle) {
+    public void updateVehicleByUserId(int userId, String name, String type) {
         MileM8Database.databaseWriteExecutor.execute(() -> {
-            vehicleDAO.update(vehicle);
+            vehicleDAO.updateVehicleByUserId(userId,name,type);
         });
     }
 }

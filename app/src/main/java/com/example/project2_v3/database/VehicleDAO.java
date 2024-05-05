@@ -32,4 +32,7 @@ public interface VehicleDAO {
 
    @Update
     void update(Vehicle vehicle);
+
+   @Query("UPDATE " + MileM8Database.VEHICLE_TABLE + " SET name = :name, type = :type WHERE id = :userId")
+    void updateVehicleByUserId(int userId, String name, String type);
 }

@@ -65,7 +65,7 @@ public abstract class MileM8Database extends RoomDatabase {
                 User admin = new User("admin1", "admin1");
                 admin.setAdmin(true);
                 dao.insert(admin);
-                Vehicle vehicle1 = new Vehicle("My Car", "Admin Car");
+                Vehicle vehicle1 = new Vehicle("Admin Car", "Admin Type");
                 vdao.insert(vehicle1);
                 User testUser1 = new User ("testuser1", "testuser1");
                 dao.insert(testUser1);

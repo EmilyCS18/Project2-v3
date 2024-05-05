@@ -1,7 +1,10 @@
 package com.example.project2_v3;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -64,7 +67,7 @@ public class LandingActivity extends AppCompatActivity {
         tempButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LandingActivity.this, AdminActivity.class);
+                Intent intent = new Intent(LandingActivity.this, AdminActivity.class).putExtra("USER_ID", userId);
                 startActivity(intent);
             }
         });
@@ -89,7 +92,8 @@ public class LandingActivity extends AppCompatActivity {
 
     private void updateAdminButtonVis() {
         // This function should update the visibility of the Admin button based on whether the user is an admin
-        boolean isAdmin = false;
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.sharedprefrence_file_key), Context.MODE_PRIVATE);
+        boolean isAdmin = sharedPreferences.getBoolean(getString(R.string.preference_isAdmin_key),false);
         if (isAdmin) {
             adminButton.setVisibility(View.VISIBLE);
         } else {
