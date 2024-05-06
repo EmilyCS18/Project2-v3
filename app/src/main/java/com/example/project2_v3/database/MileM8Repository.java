@@ -54,8 +54,8 @@ public class MileM8Repository {
         return null;
     }
 
-    public LiveData<List<MileM8>> getAllMilesLiveData() {
-        return milem8DAO.getAllTrips();
+    public LiveData<List<MileM8>> getAllMilesLiveData(int userId) {
+        return milem8DAO.getAllTripsByUser(userId);
     }
 
 
