@@ -20,7 +20,6 @@ public class LandingActivity extends AppCompatActivity {
     private Button logoutButton;
     private int userId;
 
-    private Button tempButton;
 
 //TODO: Issue with SessionToken???
     @Override
@@ -67,9 +66,6 @@ public class LandingActivity extends AppCompatActivity {
     private void logoutUser() {
         Executors.newSingleThreadExecutor().execute(() -> {
             MileM8Database db = MileM8Database.getDatabase(getApplicationContext());
-
-            // Clear session-specific data only
-            db.sessionTokenDAO().clearSessionTokens();
 
             clearUserIdFromSharedPreferences();
 

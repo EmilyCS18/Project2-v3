@@ -28,6 +28,9 @@ public interface MileM8DAO {
     @Query("SELECT * FROM milem8table")
     LiveData<List<MileM8>> getAllTrips();
 
+    @Query("SELECT * FROM mileM8Table WHERE userId = :userId")
+    LiveData<List<MileM8>> getAllTripsByUser(int userId);
+
     // Retrieve trips between two dates
     @Query("SELECT * FROM mileM8Table WHERE date BETWEEN :startDate AND :endDate")
     LiveData<List<MileM8>> getTripsBetweenDates(LocalDateTime startDate, LocalDateTime endDate);
