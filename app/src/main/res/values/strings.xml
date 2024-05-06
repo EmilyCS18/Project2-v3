@@ -28,4 +28,7 @@
     <string name="update_password">Update Password</string>
     <string name="my_car">My Car</string>
     <string name="car_type">Car Type</string>
+    <string name="total_expenses_0_00">Total Expenses: $0.00</string>
+    <string name="total_miles_0_miles">Total Miles: 0 miles</string>
+    <string name="total_trips_0">Total Trips: 0</string>
 </resources>

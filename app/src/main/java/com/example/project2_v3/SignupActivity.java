@@ -21,8 +21,6 @@ public class SignupActivity extends AppCompatActivity {
     Button signupButton;
     MileM8Repository repository;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

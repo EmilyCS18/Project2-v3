@@ -2,13 +2,11 @@ package com.example.project2_v3;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.LiveData;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,8 +16,6 @@ import com.example.project2_v3.database.entities.MileM8;
 import java.util.List;
 
 public class ReportsActivity extends AppCompatActivity {
-    //TODO: fix the user specific data, data is being shared with all users
-
     private TextView totalTripsTextView, totalMilesTextView, totalExpensesTextView;
     private MileM8Repository  repository;
     private int userId;
@@ -66,9 +62,9 @@ public class ReportsActivity extends AppCompatActivity {
             totalMilesTextView.setText("Total Miles: " + String.format("%.0f miles", totalMiles));
             totalExpensesTextView.setText(String.format("Total Expenses: $%.2f", totalExpenses));
         } else {
-            totalTripsTextView.setText("Total Trips: 0");
-            totalMilesTextView.setText("Total Miles: 0 miles");
-            totalExpensesTextView.setText("Total Expenses: $0.00");
+            totalTripsTextView.setText(R.string.total_trips_0);
+            totalMilesTextView.setText(R.string.total_miles_0_miles);
+            totalExpensesTextView.setText(R.string.total_expenses_0_00);
         }
     }
 
