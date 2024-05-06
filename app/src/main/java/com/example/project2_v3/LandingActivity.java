@@ -20,8 +20,6 @@ public class LandingActivity extends AppCompatActivity {
     private Button logoutButton;
     private int userId;
 
-
-//TODO: Issue with SessionToken???
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

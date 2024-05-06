@@ -3,11 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="start"
     android:background="@drawable/blue_gradient"
     tools:context=".ReportsActivity">
 
@@ -17,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/bright_blue"
         android:drawableLeft="@drawable/baseline_arrow_back_ios_24"
         android:hint="l"
@@ -82,6 +81,7 @@
                 android:text="Total Miles: 0"
                 android:textAlignment="textStart"
                 android:textColor="@color/bright_blue"
+                android:layout_marginTop="16dp"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
@@ -92,19 +92,10 @@
                 android:text="Total Expenses: $0.00"
                 android:textAlignment="textStart"
                 android:textColor="@color/bright_blue"
+                android:layout_marginTop="16dp"
                 android:textSize="25sp"
                 android:textStyle="bold"
                  />
-
-            <Button
-                android:id="@+id/ytd_summary_button"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/bright_blue"
-                android:text="View Saved Trips"
-                android:textSize="18sp"
-                app:cornerRadius="20dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

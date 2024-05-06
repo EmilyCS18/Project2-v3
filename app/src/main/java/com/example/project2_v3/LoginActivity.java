@@ -33,11 +33,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         repository = MileM8Repository.getRepository(getApplication());
-        //repository.getUserbyUserId(loggedInUserId).observe(this, MileM8Repository);
 
         binding.signupRedirectTextTextView.setOnClickListener(v -> {
-            loginUser(savedInstanceState);
-            verifyUser();
+            Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+            startActivity(intent);
         });
 
         binding.loginButton.setOnClickListener(v ->{

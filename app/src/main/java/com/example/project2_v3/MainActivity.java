@@ -1,28 +1,15 @@
 package com.example.project2_v3;
 
-//TODO:make the repository public b/c of error, find out if it should of remained private
-import static com.example.project2_v3.database.MileM8Repository.repository;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.project2_v3.database.MileM8Repository;
-import com.example.project2_v3.database.entities.MileM8;
 import com.example.project2_v3.database.entities.User;
 import com.example.project2_v3.databinding.ActivityMainBinding;
 

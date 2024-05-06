@@ -58,25 +58,6 @@ public class MileM8Repository {
         return milem8DAO.getAllTripsByUser(userId);
     }
 
-
-    /*public ArrayList<MileM8> getAllMiles() {
-        Future<ArrayList<MileM8>> future = MileM8Database.databaseWriteExecutor.submit(
-                new Callable<ArrayList<MileM8>>() {
-                    @Override
-                    public ArrayList<MileM8> call() throws Exception {
-                        return (ArrayList<MileM8>) milem8DAO.getAllRecords();
-                    }
-                });
-        try{
-            return future.get();
-        } catch (InterruptedException | ExecutionException e){
-            e.printStackTrace();
-           Log.i(MainActivity.TAG, "Problem when getting all MilesLogs in the repository");
-        }
-        return null;
-
-    }*/
-
     public void insertMileM8(MileM8 mileM8){
         MileM8Database.databaseWriteExecutor.execute(()->
                 {
