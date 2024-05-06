@@ -16,6 +16,7 @@ import com.example.project2_v3.databinding.ActivityLoginBinding;
 public class LoginActivity extends AppCompatActivity {
     private static final String LOGIN_ACTIVITY_USER_ID = "com.example.project2_v3.LOGIN_ACTIVITY_USER_ID";
     static final String SAVED_PREFERENCE_USERID_KEY = "com.example.project2_v3.SHARED_PREFERENCE_USERID_KEY";
+    static final String SAVED_PREFERENCE_USERNAME_KEY = "com.example.project2_v3.SHARED_PREFERENCE_USERID_KEY";
     private static final int LOGGED_OUT = -1;
     private MileM8Repository repository;
 
@@ -33,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         repository = MileM8Repository.getRepository(getApplication());
-        //repository.getUserbyUserId(loggedInUserId).observe(this, MileM8Repository);
 
         binding.signupRedirectTextTextView.setOnClickListener(v -> {
             loginUser(savedInstanceState);
@@ -106,6 +106,10 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
         sharedPrefEditor.putInt(getString(R.string.preference_userId_key), loggedInUserId);
         sharedPrefEditor.apply();
+
+        if (user != null) {
+            sharedPrefEditor.putString(getString(R.string.pre))
+        }
 
     }
 

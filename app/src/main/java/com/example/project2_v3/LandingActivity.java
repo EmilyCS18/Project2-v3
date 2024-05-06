@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
 import com.example.project2_v3.database.MileM8Database;
 
 import java.util.concurrent.Executors;
@@ -20,16 +22,19 @@ public class LandingActivity extends AppCompatActivity {
     private Button logoutButton;
     private int userId;
 
-
-//TODO: Issue with SessionToken???
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
 
         // Retrieve the user ID from the intent
-        userId = getIntent().getIntExtra("USER_ID", -1);
+        userId = getUserIdFromSharedPreferences();
 
+        TextView welcomeUsernameTextView = findViewById(R.id.welcome_Username);
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.sharedprefrence_file_key), Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString(getString(R.string.preference_username_key), "Guest");
+        welcomeUsernameTextView.setText(getString(R.string.welcome_username, username));
         // Initialize buttons
         eventsButton = findViewById(R.id.button_LP_events);
         reportsButton = findViewById(R.id.button_LP_reports);
@@ -88,6 +93,11 @@ public class LandingActivity extends AppCompatActivity {
         } else {
             adminButton.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private int getUserIdFromSharedPreferences() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.sharedprefrence_file_key), Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(getString(R.string.preference_userId_key), -1);
     }
 
     private void clearUserIdFromSharedPreferences() {
